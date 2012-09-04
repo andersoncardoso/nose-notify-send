@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
-    name='nose-notify-send',
+    name='nose_notify_send',
     version='0.1',
-    entry_points = {
+    entry_points={
         'nose.plugins.0.10': [
-            'nose-notify-send = nose-notify-send:NoseNotifySend']
+            'nosenotifysend = nose_notify_send:NoseNotifySend']
         },
-    packages = ['nose-notify-send'],
+    packages=['nose_notify_send'],
 )
 

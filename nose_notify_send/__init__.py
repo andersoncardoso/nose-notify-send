@@ -6,7 +6,9 @@ from subprocess import call
 
 
 def notify(icon, msg):
-    msg = "notify-send --hint int:transient:1 -e 2000 -i {icon} {msg}"
+    # msg = "notify-send --hint int:transient:1 -t 2000 -i {icon} {msg}".format(
+    msg = "notify-send -t 2000 -i {icon} {msg}".format(
+            icon=icon, msg=msg)
     call(msg.split())
 
 
