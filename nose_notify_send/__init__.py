@@ -1,37 +1,34 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
-
+import os
 from nose.plugins import Plugin
 from subprocess import call
 
 
 def notify(icon, msg):
-    # msg = "notify-send --hint int:transient:1 -t 2000 -i {icon} {msg}".format(
-    msg = "notify-send -t 2000 -i {icon} {msg}".format(
-            icon=icon, msg=msg)
-    call(msg.split())
+    image_name = os.path.join(os.path.dirname(__file__),
+            '{0}.png'.format(icon))
+    cmd = "notify-send --hint int:transient:1 -t 2000"
+    cmd = cmd.split() + ['-i', image_name, msg]
+    call(cmd)
 
 
 class NoseNotifySend (Plugin):
 
     def __init__(self):
         super(NoseNotifySend, self).__init__()
-        self.number_of_failed_tests = 0
+        self.number_of_fails = 0
 
     def addError(self, test, err):
-        self.record_failed_test(test)
+        self.number_of_fails += 1
 
     def addFailure(self, test, err):
-        self.record_failed_test(test)
-
-    def record_failed_test(self, test):
-        self.number_of_failed_tests += 1
-        self.failed_test = test
+        self.number_of_fails += 1
 
     def finalize(self, result):
-        if self.number_of_failed_tests == 0:
-            notify("dialog-ok", "All tests passed")
+        if self.number_of_fails == 0:
+            notify("dialog-ok", "(python)    All tests PASSED")
         else:
-            notify("dialog-error", "{} tests failed".format(
-                self.number_of_failed_tests))
+            notify("dialog-error",
+                    "(python)    %s tests FAILED" % self.number_of_fails)
 
