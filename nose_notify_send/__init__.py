@@ -30,5 +30,5 @@ class NoseNotifySend (Plugin):
             notify("dialog-ok", "(python)    All tests PASSED")
         else:
             notify("dialog-error",
-                    "(python)    %s tests FAILED" % self.number_of_fails)
+                    "(PY)    %s tests FAILED" % self.number_of_fails)
 
