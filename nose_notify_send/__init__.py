@@ -27,7 +27,7 @@ class NoseNotifySend (Plugin):
 
     def finalize(self, result):
         if self.number_of_fails == 0:
-            notify("dialog-ok", "(python)    All tests PASSED")
+            notify("dialog-ok", "(PY)    All tests PASSED")
         else:
             notify("dialog-error",
                     "(PY)    %s tests FAILED" % self.number_of_fails)
